@@ -140,6 +140,7 @@ class CompoundConstituent(BaseConstituent):
 _Z0 = BaseConstituent(name="Z0", xdo="Z ZZZ ZZZ", u=nc.u_zero, f=nc.f_unity)
 _Sa = BaseConstituent(name="Sa", xdo="Z ZAZ ZZZ", u=nc.u_zero, f=nc.f_unity)
 _Ssa = BaseConstituent(name="Ssa", xdo="Z ZBZ ZZZ", u=nc.u_zero, f=nc.f_unity)
+_MSm = BaseConstituent(name="MSm", xdo="Z AXA ZZZ", u=nc.u_zero, f=nc.f_Mm)
 _Mm = BaseConstituent(name="Mm", xdo="Z AZY ZZZ", u=nc.u_zero, f=nc.f_Mm)
 _Mf = BaseConstituent(name="Mf", xdo="Z BZZ ZZZ", u=nc.u_Mf, f=nc.f_Mf)
 
@@ -159,6 +160,22 @@ _P1 = BaseConstituent(name="P1", xdo="A AXZ ZZA", u=nc.u_zero, f=nc.f_unity)
 _S1 = BaseConstituent(name="S1", xdo="A AYZ ZZZ", u=nc.u_zero, f=nc.f_unity)
 _OO1 = BaseConstituent(name="OO1", xdo="A CZZ ZZY", u=nc.u_OO1, f=nc.f_OO1)
 
+# Additional minor diurnals. The lunar members are grouped with the major
+# constituent sharing their node-factor structure (O1 for the lower-frequency
+# group, J1 for the upper group, OO1 for the highest); the solar members
+# (pi1, psi1) require no nodal correction.
+_alpha1 = BaseConstituent(name="alpha1", xdo="A VBA ZZA", u=nc.u_O1, f=nc.f_O1)
+_sigma1 = BaseConstituent(name="sigma1", xdo="A WBZ ZZA", u=nc.u_O1, f=nc.f_O1)
+_tau1 = BaseConstituent(name="tau1", xdo="A YBZ ZZA", u=nc.u_O1, f=nc.f_O1)
+_beta1 = BaseConstituent(name="beta1", xdo="A ZXA ZZA", u=nc.u_O1, f=nc.f_O1)
+_NO1 = BaseConstituent(name="NO1", xdo="A ZZA ZZA", u=nc.u_J1, f=nc.f_J1)
+_chi1 = BaseConstituent(name="chi1", xdo="A ZBY ZZA", u=nc.u_J1, f=nc.f_J1)
+_pi1 = BaseConstituent(name="pi1", xdo="A AWZ ZAA", u=nc.u_zero, f=nc.f_unity)
+_psi1 = BaseConstituent(name="psi1", xdo="A AAZ ZYY", u=nc.u_zero, f=nc.f_unity)
+_phi1 = BaseConstituent(name="phi1", xdo="A ABZ ZZY", u=nc.u_J1, f=nc.f_J1)
+_theta1 = BaseConstituent(name="theta1", xdo="A BXA ZZA", u=nc.u_J1, f=nc.f_J1)
+_upsilon1 = BaseConstituent(name="upsilon1", xdo="A DZY ZZY", u=nc.u_OO1, f=nc.f_OO1)
+
 # Semi-Diurnals
 _2N2 = BaseConstituent(name="2N2", xdo="B XZB ZZZ", u=nc.u_M2, f=nc.f_M2)
 _N2 = BaseConstituent(name="N2", xdo="B YZA ZZZ", u=nc.u_M2, f=nc.f_M2)
@@ -170,6 +187,12 @@ _T2 = BaseConstituent(name="T2", xdo="B BWZ ZAZ", u=nc.u_zero, f=nc.f_unity)
 _S2 = BaseConstituent(name="S2", xdo="B BXZ ZZZ", u=nc.u_zero, f=nc.f_unity)
 _R2 = BaseConstituent(name="R2", xdo="B BYZ ZYB", u=nc.u_zero, f=nc.f_unity)
 _K2 = BaseConstituent(name="K2", xdo="B BZZ ZZZ", u=nc.u_K2, f=nc.f_K2)
+
+# Additional minor semi-diurnals. OQ2 is a lunar elliptic line (M2 node
+# factor); H1 and H2 are solar lines requiring no nodal correction.
+_OQ2 = BaseConstituent(name="OQ2", xdo="B WZC ZZZ", u=nc.u_M2, f=nc.f_M2)
+_H1 = BaseConstituent(name="H1", xdo="B ZYZ ZAZ", u=nc.u_zero, f=nc.f_unity)
+_H2 = BaseConstituent(name="H2", xdo="B ZAZ ZYZ", u=nc.u_zero, f=nc.f_unity)
 
 # Third-Diurnals
 _M3 = BaseConstituent(
@@ -183,30 +206,55 @@ _MSF = CompoundConstituent(name="MSF", members=[(_S2, 1), (_M2, -1)])
 # Diurnal
 _2Q1 = CompoundConstituent(name="2Q1", members=[(_N2, 1), (_J1, -1)])
 _rho1 = CompoundConstituent(name="rho1", members=[(_nu2, 1), (_K1, -1)])
+_SO1 = CompoundConstituent(name="SO1", members=[(_S2, 1), (_O1, -1)])
 
 # Semi-Diurnal
 
 _mu2 = CompoundConstituent(name="mu2", members=[(_M2, 2), (_S2, -1)])  # 2MS2
 _2SM2 = CompoundConstituent(name="2SM2", members=[(_S2, 2), (_M2, -1)])
+_epsilon2 = CompoundConstituent(  # MNS2
+    name="epsilon2", members=[(_M2, 1), (_N2, 1), (_S2, -1)]
+)
+_MKS2 = CompoundConstituent(name="MKS2", members=[(_M2, 1), (_K2, 1), (_S2, -1)])
+_MSN2 = CompoundConstituent(name="MSN2", members=[(_M2, 1), (_S2, 1), (_N2, -1)])
+_eta2 = CompoundConstituent(name="eta2", members=[(_K1, 1), (_J1, 1)])  # KJ2
 
 # Third-Diurnal
 _2MK3 = CompoundConstituent(name="2MK3", members=[(_M2, 1), (_O1, 1)])
 _MK3 = CompoundConstituent(name="MK3", members=[(_M2, 1), (_K1, 1)])
+_MO3 = CompoundConstituent(name="MO3", members=[(_M2, 1), (_O1, 1)])
+_SO3 = CompoundConstituent(name="SO3", members=[(_S2, 1), (_O1, 1)])
+_SK3 = CompoundConstituent(name="SK3", members=[(_S2, 1), (_K1, 1)])
 
 # Quarter-Diurnal
 _MN4 = CompoundConstituent(name="MN4", members=[(_M2, 1), (_N2, 1)])
 _M4 = CompoundConstituent(name="M4", members=[(_M2, 2)])
 _MS4 = CompoundConstituent(name="MS4", members=[(_M2, 1), (_S2, 1)])
 _S4 = CompoundConstituent(name="S4", members=[(_S2, 2)])
+_SN4 = CompoundConstituent(name="SN4", members=[(_S2, 1), (_N2, 1)])
+_MK4 = CompoundConstituent(name="MK4", members=[(_M2, 1), (_K2, 1)])
+_SK4 = CompoundConstituent(name="SK4", members=[(_S2, 1), (_K2, 1)])
+
+# Fifth-Diurnal
+_2MK5 = CompoundConstituent(name="2MK5", members=[(_M2, 2), (_K1, 1)])
+_2SK5 = CompoundConstituent(name="2SK5", members=[(_S2, 2), (_K1, 1)])
 
 # Sixth-Diurnal
 _M6 = CompoundConstituent(name="M6", members=[(_M2, 3)])
 _S6 = CompoundConstituent(name="S6", members=[(_S2, 3)])
+_2MN6 = CompoundConstituent(name="2MN6", members=[(_M2, 2), (_N2, 1)])
+_2MS6 = CompoundConstituent(name="2MS6", members=[(_M2, 2), (_S2, 1)])
+_2MK6 = CompoundConstituent(name="2MK6", members=[(_M2, 2), (_K2, 1)])
+_2SM6 = CompoundConstituent(name="2SM6", members=[(_M2, 1), (_S2, 2)])
+_MSK6 = CompoundConstituent(name="MSK6", members=[(_M2, 1), (_S2, 1), (_K2, 1)])
+
+# Seventh-Diurnal
+_3MK7 = CompoundConstituent(name="3MK7", members=[(_M2, 3), (_K1, 1)])
 
 # Eighth-Diurnals
 _M8 = CompoundConstituent(name="M8", members=[(_M2, 4)])
 
-
+# NOAA set (37 tidal constituents)
 noaa = [
     _M2,
     _S2,
@@ -245,4 +293,78 @@ noaa = [
     _K2,
     _M8,
     _MS4,
+]
+
+# Extended 67-constituent set (the NOAA set above augmented with the additional
+# minor and shallow-water constituents), ordered by increasing frequency.
+# list provided by Pengcheng Wang, obtained by setting Rayleigh criteria to 0.8
+# note M1 in NOAA set is replaced by NO1 here.
+extended = [
+    _Sa,
+    _Ssa,
+    _MSm,
+    _Mm,
+    _MSF,
+    _Mf,
+    _alpha1,
+    _2Q1,
+    _sigma1,
+    _Q1,
+    _rho1,
+    _O1,
+    _tau1,
+    _beta1,
+    _NO1,
+    _chi1,
+    _pi1,
+    _P1,
+    _S1,
+    _K1,
+    _psi1,
+    _phi1,
+    _theta1,
+    _J1,
+    _SO1,
+    _OO1,
+    _upsilon1,
+    _OQ2,
+    _epsilon2,
+    _2N2,
+    _mu2,
+    _N2,
+    _nu2,
+    _H1,
+    _M2,
+    _H2,
+    _MKS2,
+    _lambda2,
+    _L2,
+    _T2,
+    _S2,
+    _R2,
+    _K2,
+    _MSN2,
+    _eta2,
+    _MO3,
+    _M3,
+    _SO3,
+    _MK3,
+    _SK3,
+    _MN4,
+    _M4,
+    _SN4,
+    _MS4,
+    _MK4,
+    _S4,
+    _SK4,
+    _2MK5,
+    _2SK5,
+    _2MN6,
+    _M6,
+    _2MS6,
+    _2MK6,
+    _2SM6,
+    _MSK6,
+    _3MK7,
+    _M8,
 ]
